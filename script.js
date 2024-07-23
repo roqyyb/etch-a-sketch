@@ -19,8 +19,14 @@ function etchASketch(n = 16) {
 
     // color square on mouseover
     square.addEventListener("mouseover", () => {
+      let opacity = +square.style.opacity;
+      if (opacity === null) {
+        opacity = 0.1;
+      } else if (opacity < 1) {
+        opacity += 0.1;
+      }
+      square.style.opacity = opacity;
       square.style.backgroundColor = "green";
-      console.log(square.id);
     });
   }
 }
