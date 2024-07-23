@@ -1,6 +1,14 @@
+let init = true;
 const container = document.querySelector("div");
+const btn = document.querySelector("button");
+let numOfSquares = 0;
 
-function etchASketch(n = 10) {
+function etchASketch(n = 16) {
+  container.innerHTML = "";
+  if (numOfSquares > 0 && numOfSquares <= 100) {
+    n = numOfSquares;
+  }
+
   for (let i = 1; i <= n ** 2; ++i) {
     const square = document.createElement("div");
     square.setAttribute("class", "square");
@@ -17,4 +25,21 @@ function etchASketch(n = 10) {
   }
 }
 
-etchASketch();
+if (init) {
+  etchASketch();
+  init = false;
+}
+
+btn.onclick = () => {
+  const input = Number(
+    prompt("Enter number of squares between 1 and 100, inclusive")
+  );
+  while (typeof input !== "number" || input === 0) {
+    alert("Please enter a number");
+    input = Number(
+      prompt("Enter number of squares between 1 and 100, inclusive")
+    );
+  }
+  numOfSquares = input;
+  etchASketch(numOfSquares);
+};
